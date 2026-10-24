@@ -1,0 +1,31 @@
+﻿campo,grupo,prioridad,tipo,unidad_o_valores,descripcion
+id_estudiante,IDENTIFICACION,ESENCIAL,texto,"Código sustituto, p. ej. E00001","Identificador sustituto irreversible. No usar cédula, matrícula ni ningún dato que permita reconstruirlo."
+periodo,IDENTIFICACION,ESENCIAL,texto,p. ej. 2024-1,Periodo académico en que ingresó a primer nivel. Debe coincidir con el archivo de periodos.
+carrera_codigo,IDENTIFICACION,IMPORTANTE,texto,"p. ej. C01, C02",Código de la carrera o área (no el nombre). Agrupa las carreras con menos de 5 estudiantes por periodo.
+via_salida,ETIQUETA,ESENCIAL,categórica,PERMANECE_APRUEBA | PERMANECE_REPRUEBA_RENDIMIENTO | RETIRO_VOLUNTARIO | CAMBIO_CARRERA | TRASLADO | REPRUEBA_INASISTENCIAS | CENSURA_RESERVA_SUSPENSION | CENSURA_FALLECIMIENTO,Desenlace del estudiante al cierre del periodo. PERMANECE_APRUEBA: aprobó todas las asignaturas. PERMANECE_REPRUEBA_RENDIMIENTO: reprobó alguna por bajo rendimiento y no superó el límite de inasistencias. REPRUEBA_INASISTENCIAS: reprobado por superar el 30 % de inasistencias. Dejar vacío solo en la cohorte en curso.
+dia_salida,ETIQUETA,ESENCIAL,entero,Días desde el inicio de clases (día 1 = primer día de clases),"Día en que quedó registrado el trámite de retiro voluntario, cambio de carrera o traslado. Vacío en los demás casos."
+pct_inasistencia_final,ETIQUETA,ESENCIAL,numérico,0 a 100 (%),"Porcentaje de inasistencia agregado del estudiante al cierre del periodo, ponderado por horas programadas. Vacío si salió antes del cierre."
+n_asig_reprobadas_inasistencias,ETIQUETA,ESENCIAL,entero,"0, 1, 2, ...",Número de asignaturas reprobadas por superar el límite de inasistencias. Permite resolver los casos mixtos.
+n_asig_reprobadas_rendimiento,ETIQUETA,ESENCIAL,entero,"0, 1, 2, ...",Número de asignaturas reprobadas por bajo rendimiento con asistencia dentro del límite.
+n_asignaturas_matriculadas,PREDICTOR,IMPORTANTE,entero,"1, 2, ...",Número de asignaturas matriculadas en el periodo.
+pct_inasistencia_d28,PREDICTOR,ESENCIAL,numérico,0 a 100 (%),"Horas de inasistencia hasta el día 28 / horas programadas hasta el día 28, agregado entre asignaturas. Si el estudiante salió antes, calcular hasta su día de salida."
+max_pct_inasistencia_asig_d28,PREDICTOR,ESENCIAL,numérico,0 a 100 (%),"Máximo, entre las asignaturas del estudiante, del porcentaje de inasistencia hasta el día 28 (horas de inasistencia / horas programadas hasta el día 28)."
+max_pct_inasist_sobre_total_d28,PREDICTOR,ESENCIAL,numérico,0 a 100 (%),"Máximo, entre las asignaturas, de horas de inasistencia hasta el día 28 / horas totales programadas de la asignatura en todo el periodo. Sirve para probar si un caso ya es irreversible al día 28 (si supera 30)."
+n_evaluaciones_d28,PREDICTOR,IMPORTANTE,entero,"0, 1, 2, ...","Número de evaluaciones calificadas hasta el día 28, sumando todas las asignaturas."
+nota_promedio_evaluaciones_d28,PREDICTOR,ESENCIAL,numérico,"En la escala de la institución (indicar el máximo, p. ej. 10)",Promedio de las evaluaciones calificadas hasta el día 28. Vacío si aún no hubo ninguna.
+n_tareas_asignadas_d28,PREDICTOR,DESEABLE,entero,"0, 1, 2, ...",Tareas asignadas hasta el día 28.
+n_tareas_entregadas_d28,PREDICTOR,DESEABLE,entero,"0, 1, 2, ...",Tareas entregadas hasta el día 28 (en cualquier fecha dentro de ese plazo).
+lms_accesos_d28,PREDICTOR,ESENCIAL,entero,"0, 1, 2, ...",Número de accesos al entorno virtual entre los días 1 y 28. 0 significa que no accedió; vacío significa que no hay dato.
+lms_dias_activos_d28,PREDICTOR,IMPORTANTE,entero,0 a 28,Días distintos con al menos un acceso al entorno virtual entre los días 1 y 28.
+lms_recursos_consultados_d28,PREDICTOR,DESEABLE,entero,"0, 1, 2, ...",Número de recursos o materiales consultados entre los días 1 y 28.
+lms_minutos_d28,PREDICTOR,IMPORTANTE,numérico,Minutos,Tiempo de conexión acumulado entre los días 1 y 28.
+lms_dia_primer_acceso,PREDICTOR,DESEABLE,entero,1 a 28,Día del primer acceso al entorno virtual. Vacío si no accedió en los 28 días.
+puntaje_admision,PREDICTOR,ESENCIAL,numérico,Escala del examen de ingreso (indicar el máximo),Puntaje de admisión del estudiante.
+tipo_colegio,PREDICTOR,IMPORTANTE,categórica,PUBLICO | PRIVADO | FISCOMISIONAL | OTRO,Tipo de colegio de procedencia.
+edad_anios,SUBGRUPO,ESENCIAL,entero,Años cumplidos al inicio del periodo,Edad en años. No incluir fecha de nacimiento.
+sexo,SUBGRUPO,ESENCIAL,categórica,F | M,Sexo registrado en el sistema.
+jornada,PREDICTOR,IMPORTANTE,categórica,MATUTINA | VESPERTINA | NOCTURNA,Jornada de estudio.
+estado_laboral,PREDICTOR,IMPORTANTE,categórica,SI | NO,"Si el estudiante trabaja, según la encuesta socioeconómica de admisión."
+zona_residencia,SUBGRUPO,IMPORTANTE,categórica,"URBANA | RURAL (o sector amplio, no la dirección)",Zona de residencia en categorías amplias. Agrupa las categorías con menos de 5 estudiantes.
+nivel_socioeconomico,SUBGRUPO,IMPORTANTE,categórica,"Q1 a Q5, o el estrato que use la institución",Nivel socioeconómico registrado.
+beca_financiamiento,PREDICTOR,IMPORTANTE,categórica,SIN_BECA | BECA_PARCIAL | BECA_COMPLETA | CREDITO | OTRO,"Beca o forma de financiamiento, si la institución la registra."
